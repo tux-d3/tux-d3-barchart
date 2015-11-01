@@ -1,0 +1,78 @@
+<!--
+
+
+@dependency tux-d3/tux-d3.html
+@demo demo.html
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../tux-d3/tux-d3.html">
+
+<dom-module id='tux-d3-barchart'>
+    <template>
+    <style>
+    :host ::content #chart rect {
+        fill: steelblue;
+    }
+    :host ::content #chart text {
+        fill: white;
+        font: 10px sans-serif;
+        text-anchor: end;
+    }
+    </style>
+    <svg id="chart" width="720" height="120">
+        <template is='dom-repeat' items='[[data]]' as='datum' index='index'>
+            <g transform$='[[_computeTransform(datum, index)]]'>
+                <rect width$='[[_computeWidth(datum)]]' height='19'></rect>
+                <text x$="[[_computeLabelX(datum)]]" y="9.5" dy=".35em">[[datum]]</text>
+            </g>
+        </template>
+    </svg>
+    </template>
+    <script>
+    _svgFix();
+    Polymer({
+        is: 'tux-d3-barchart',
+        properties: {
+            data: {
+                type: Array,
+                value: function() {
+                    return [ 6, 8, 15, 33, 25, 65 ];
+                },
+                notify: true
+            }
+        },
+        observers: ['_handleDataMutation(data.splices)'],
+
+        attached: function(event) {
+            var self = this;
+            self._update();
+        },
+
+        _computeTransform: function(datum, index) {
+            console.log(datum, index);
+            return 'translate(0, ' + (index * 20) + ')'
+        },
+
+        _computeStyle: function(datum) {
+            var self = this;
+            return 'width: ' + (datum * 10) + "px;"
+        },
+
+        _computeLabelX: function(datum) { var self = this; return self._computeWidth(datum) - 3; },
+
+        _computeWidth: function(datum) { return 10*datum; },
+
+        _handleDataMutation: function(changeData) {
+            var self = this;
+            self._update(changeData);
+        },
+        _addValue: function(value) {
+            var self = this;
+            return self.push('data', value);
+        },
+        _update: function(event) {
+            var self = this;
+        }
+    })
+    </script>
+</dom-module>

@@ -1,0 +1,26 @@
+{
+  "name": "tux-d3-barchart",
+  "homepage": "https://github.com/tux-d3/tux-d3-barchart",
+  "authors": [
+    "Ahmed Masud <ahmed.masud@trustifier.com>"
+  ],
+  "description": "A D3 barchart component",
+  "main": "tux-d3-barchart.html",
+  "moduleType": [],
+  "keywords": [
+    "webcomponents",
+    "tux-d3",
+    "trustifier",
+    "d3js",
+    "d3",
+    "polymer"
+  ],
+  "license": "BSD-3-Clause",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
